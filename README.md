@@ -130,4 +130,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-© 2023 Grocery Shop App. All Rights Reserved.
+© 2025 Grocery Shop App. All Rights Reserved.
