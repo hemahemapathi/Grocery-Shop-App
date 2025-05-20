@@ -44,7 +44,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173', // Your frontend URL
+  origin: 'https://groovo-shopping-app.netlify.app', // Your frontend URL
   credentials: true,
   methods : ['GET','POST','PUT','DELETE','PATCH','OPTIONS'],
 }));
