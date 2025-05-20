@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Shop API</title>
+    <link rel="stylesheet" href="/css/api-docs.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Grocery Shop API</h1>
+        <p>Welcome to the Grocery Shop API. Use the endpoints below to interact with our services.</p>
+        
+        <div class="buttons">
+            <a href="/api-docs" class="btn">Interactive API Documentation</a>
+            <a href="/" class="btn">Back to Home</a>
+        </div>
+
+        <div class="api-section">
+            <h2>Authentication</h2>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-post">POST</span>
+                <span class="endpoint-path">/api/auth/register</span>
+                <div class="endpoint-description">Register a new user account</div>
+            </div>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-post">POST</span>
+                <span class="endpoint-path">/api/auth/login</span>
+                <div class="endpoint-description">Login to an existing account</div>
+            </div>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-get">GET</span>
+                <span class="endpoint-path">/api/auth/profile</span>
+                <div class="endpoint-description">Get the current user's profile</div>
+            </div>
+        </div>
+
+        <div class="api-section">
+            <h2>Products</h2>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-get">GET</span>
+                <span class="endpoint-path">/api/products</span>
+                <div class="endpoint-description">Get all products</div>
+            </div>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-get">GET</span>
+                <span class="endpoint-path">/api/products/:id</span>
+                <div class="endpoint-description">Get a specific product by ID</div>
+            </div>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-post">POST</span>
+                <span class="endpoint-path">/api/products</span>
+                <div class="endpoint-description">Create a new product (admin only)</div>
+            </div>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-put">PUT</span>
+                <span class="endpoint-path">/api/products/:id</span>
+                <div class="endpoint-description">Update a product (admin only)</div>
+            </div>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-delete">DELETE</span>
+                <span class="endpoint-path">/api/products/:id</span>
+                <div class="endpoint-description">Delete a product (admin only)</div>
+            </div>
+        </div>
+
+        <div class="api-section">
+            <h2>Cart</h2>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-get">GET</span>
+                <span class="endpoint-path">/api/cart</span>
+                <div class="endpoint-description">Get the current user's cart</div>
+            </div>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-post">POST</span>
+                <span class="endpoint-path">/api/cart</span>
+                <div class="endpoint-description">Add an item to the cart</div>
+            </div>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-put">PUT</span>
+                <span class="endpoint-path">/api/cart/:itemId</span>
+                <div class="endpoint-description">Update a cart item quantity</div>
+            </div>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-delete">DELETE</span>
+                <span class="endpoint-path">/api/cart/:itemId</span>
+                <div class="endpoint-description">Remove an item from the cart</div>
+            </div>
+        </div>
+
+        <div class="api-section">
+            <h2>Orders</h2>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-get">GET</span>
+                <span class="endpoint-path">/api/orders</span>
+                <div class="endpoint-description">Get all orders for the current user</div>
+            </div>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-get">GET</span>
+                <span class="endpoint-path">/api/orders/:id</span>
+                <div class="endpoint-description">Get a specific order by ID</div>
+            </div>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-post">POST</span>
+                <span class="endpoint-path">/api/orders</span>
+                <div class="endpoint-description">Create a new order</div>
+            </div>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-put">PUT</span>
+                <span class="endpoint-path">/api/orders/:id</span>
+                <div class="endpoint-description">Update an order status (admin only)</div>
+            </div>
+        </div>
+
+        <div class="api-section">
+            <h2>Payment</h2>
+            
+            <div class="endpoint">
+                <span class="endpoint-method method-post">POST</span>
+                <span class="endpoint-path">/api/create-payment-intent</span>
+                <div class="endpoint-description">Create a payment intent for Stripe checkout</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Grocery Shop API &copy; 2023</p>
+    </div>
+</body>
+</html>

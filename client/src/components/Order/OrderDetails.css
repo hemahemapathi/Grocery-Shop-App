@@ -1,0 +1,187 @@
+.delivery-status {
+    margin-top: 1rem;
+  }
+  
+  .text-right {
+    text-align: right;
+  }
+  
+  .order-progress {
+    margin: 2rem 0;
+  }
+  
+  .order-progress .progress {
+    height: 10px;
+  }
+  
+  .order-timeline {
+    position: relative;
+    margin: 2rem 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .order-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 20px;
+    width: 2px;
+    background-color: #e9ecef;
+  }
+  
+  .order-timeline-item {
+    position: relative;
+    padding-left: 50px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .order-timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #28a745;
+  }
+  
+  .order-timeline-item.pending::before {
+    background-color: #ffc107;
+  }
+  
+  .order-timeline-item.active::before {
+    background-color: #007bff;
+  }
+  
+  .order-timeline-item.completed::before {
+    background-color: #28a745;
+  }
+  
+  .order-timeline-item.cancelled::before {
+    background-color: #dc3545;
+  }
+  
+  .order-timeline-date {
+    color: #6c757d;
+    font-size: 0.875rem;
+  }
+  
+  @media (max-width: 768px) {
+    .text-right {
+      text-align: left;
+      margin-top: 0.5rem;
+    }
+  }
+
+  /* Add these styles to the end of your existing CSS file */
+
+/* Reduce card size */
+.compact-card {
+  max-width: 400px;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Reduce padding in card body */
+.card-body {
+  padding: 0.875rem;
+}
+
+/* Make the order items list shorter */
+.compact-item-list {
+  max-height: 180px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  border: 1px solid #e9ecef;
+  border-radius: 0.25rem;
+}
+
+.order-item {
+  padding: 0.4rem 0.8rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.order-item-image {
+  max-width: 40px;
+  max-height: 40px;
+  object-fit: contain;
+}
+
+/* Make the order summary card smaller */
+.order-summary-card {
+  max-width: 450px;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.order-summary-card .list-group-item {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+}
+
+/* Reduce spacing in the main container */
+.py-5 {
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+}
+
+/* Make headings more compact */
+h1.mb-4 {
+  margin-bottom: 1rem !important;
+  font-size: 1.5rem;
+}
+
+h2.mb-3 {
+  margin-bottom: 0.75rem !important;
+  font-size: 1.2rem;
+}
+
+h5 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Make paragraph elements more compact */
+p {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+/* Reduce alert padding */
+.alert {
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .compact-card, .order-summary-card {
+    max-width: 100%;
+  }
+  
+  .card-body {
+    padding: 0.75rem;
+  }
+  
+  .compact-item-list {
+    max-height: 160px;
+  }
+  
+  h1 {
+    font-size: 1.4rem;
+  }
+  
+  h2 {
+    font-size: 1.1rem;
+  }
+}
+
+  

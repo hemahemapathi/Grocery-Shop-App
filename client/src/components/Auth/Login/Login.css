@@ -1,0 +1,65 @@
+.login-container {
+  animation-duration: 0.8s;
+}
+
+.login-container .card {
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+input::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+
+.login-container .card:hover {
+  transform: translateY(-5px);
+}
+
+.login-container h1 {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.login-container .form-control:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+}
+
+.login-container .btn-success {
+  background-color: #4caf50;
+  border-color: #4caf50;
+  transition: all 0.3s ease;
+}
+
+.login-container .btn-success:hover {
+  background-color: #3e8e41;
+  border-color: #3e8e41;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-container .btn-outline-secondary {
+  border-color: #ced4da;
+  color: #6c757d;
+}
+
+.login-container .btn-outline-secondary:hover {
+  background-color: #f8f9fa;
+  color: #495057;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate__fadeIn {
+  animation-name: fadeIn;
+}

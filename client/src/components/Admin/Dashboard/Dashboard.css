@@ -1,0 +1,255 @@
+.admin-dashboard {
+    padding: 20px 0;
+  }
+  
+  .dashboard-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    height: 100%;
+  }
+  
+  .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  .dashboard-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+  }
+  
+  .orders-icon {
+    background-color: #4e73df;
+  }
+  
+  .products-icon {
+    background-color: #1cc88a;
+  }
+  
+  .users-icon {
+    background-color: #36b9cc;
+  }
+  
+  .revenue-icon {
+    background-color: #f6c23e;
+  }
+  
+  .card-title {
+    font-weight: 700;
+    margin-bottom: 0;
+  }
+  
+  .card-subtitle {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+  }
+  
+  .product-thumbnail {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .table th {
+    font-weight: 600;
+    color: #5a5c69;
+  }
+  
+  .table td {
+    vertical-align: middle;
+  }
+  
+  .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  .nav-tabs .nav-link {
+    font-weight: 500;
+    color: #5a5c69;
+  }
+  
+  .nav-tabs .nav-link.active {
+    font-weight: 600;
+    color: #4e73df;
+    border-bottom: 2px solid #4e73df;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .dashboard-card {
+      margin-bottom: 20px;
+    }
+    
+    .table-responsive {
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* Add these styles at the end of your existing CSS file */
+
+/* Compact dashboard container */
+.compact-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.75rem 0.5rem;
+}
+
+/* Reduce spacing */
+.compact-dashboard .mb-4 {
+  margin-bottom: 1rem !important;
+}
+
+.compact-dashboard .mb-3 {
+  margin-bottom: 0.75rem !important;
+}
+
+.compact-dashboard .me-2 {
+  margin-right: 0.5rem !important;
+}
+
+.compact-dashboard .me-1 {
+  margin-right: 0.25rem !important;
+}
+
+/* Make cards more compact */
+.compact-dashboard .dashboard-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 0;
+}
+
+.compact-dashboard .dashboard-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.compact-dashboard .card-body {
+  padding: 0.75rem !important;
+}
+
+/* Smaller dashboard icons */
+.compact-dashboard .dashboard-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+}
+
+/* Smaller text for card titles */
+.compact-dashboard h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.compact-dashboard .card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.compact-dashboard .card-subtitle {
+  font-size: 0.75rem;
+}
+
+/* Tabs styling */
+.compact-dashboard .nav-tabs {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.compact-dashboard .nav-tabs .nav-link {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+/* Table styling */
+.compact-dashboard .table {
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
+.compact-dashboard .table th {
+  padding: 0.5rem;
+  font-weight: 500;
+}
+
+.compact-dashboard .table td {
+  padding: 0.4rem 0.5rem;
+  vertical-align: middle;
+}
+
+/* Card headers */
+.compact-dashboard .card-header {
+  padding: 0.5rem 0.75rem;
+}
+
+.compact-dashboard .card-header h5 {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* Product thumbnail */
+.compact-dashboard .product-thumbnail {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+/* Button styling */
+.compact-dashboard .btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+/* Stats row spacing */
+.stats-row {
+  margin-right: -0.5rem;
+  margin-left: -0.5rem;
+}
+
+.stats-row > [class*="col-"] {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .compact-dashboard {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .compact-dashboard .dashboard-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+  
+  .compact-dashboard .card-title {
+    font-size: 1rem;
+  }
+  
+  .compact-dashboard h2 {
+    font-size: 1.2rem;
+  }
+  
+  .compact-dashboard .table {
+    font-size: 0.75rem;
+  }
+  
+  .compact-dashboard .table th, 
+  .compact-dashboard .table td {
+    padding: 0.3rem 0.4rem;
+  }
+  
+  .compact-dashboard .product-thumbnail {
+    width: 30px !important;
+    height: 30px !important;
+  }
+}

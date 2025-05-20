@@ -1,0 +1,136 @@
+.product-list-container {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  position: relative;
+}
+
+.product-list-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Filter icon button */
+.filter-icon-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  background-color: white;
+}
+
+.filter-icon-btn:hover {
+  background-color: #f8f9fa;
+}
+
+.sort-select {
+  border-radius: 20px;
+  border: 1px solid #e0e0e0;
+  background-color: white;
+  font-size: 0.85rem;
+  padding: 0.25rem 2rem 0.25rem 0.75rem;
+}
+
+.product-count-info {
+  color: #6c757d;
+  font-size: 0.85rem;
+}
+
+/* Pagination styling */
+.pagination {
+  margin-top: 1.5rem;
+}
+
+.pagination .page-link {
+  color: #28a745;
+  border-color: #dee2e6;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.7rem;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #6c757d;
+}
+
+.floating-action-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+}
+
+.floating-action-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.floating-action-button:hover {
+  transform: translateY(-5px);
+}
+
+/* For fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.floating-action-container {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+
+/* Container adjustments */
+.container {
+  max-width: 1200px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .product-list-title {
+    font-size: 1.2rem;
+  }
+  
+  .sort-select {
+    font-size: 0.8rem;
+  }
+  
+  .product-count-info {
+    font-size: 0.8rem;
+  }
+  
+  .pagination .page-link {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Ensure filter sidebar works properly on all screen sizes */
+@media (min-width: 992px) {
+  .col-with-sidebar {
+    margin-left: 300px;
+    transition: margin-left 0.3s ease;
+  }
+}

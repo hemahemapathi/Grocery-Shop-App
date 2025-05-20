@@ -1,0 +1,90 @@
+/* Filter Sidebar */
+.filter-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  background-color: white;
+  z-index: 1050;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+  padding: 1rem;
+}
+
+.filter-sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.filter-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+}
+
+/* Form elements styling */
+.form-select-custom {
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+}
+
+.form-select-custom:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+}
+
+.form-control:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.custom-checkbox .form-check-input:checked {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.custom-checkbox .form-check-input:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+/* Apply filter button */
+.apply-filter-btn {
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .filter-sidebar {
+    width: 85%;
+    max-width: 280px;
+  }
+}
+
+@media (min-width: 992px) {
+  .col-with-sidebar {
+    margin-left: 300px;
+    transition: margin-left 0.3s ease;
+  }
+}
