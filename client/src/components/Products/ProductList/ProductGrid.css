@@ -194,7 +194,7 @@
 }
 
 .qty-btn {
-  border: none;
+  
   background-color: #f8f9fa;
   color: #28a745;
   padding: 1px 5px;
@@ -332,4 +332,5 @@
   display: flex;
   align-items: center;
 }
+
 

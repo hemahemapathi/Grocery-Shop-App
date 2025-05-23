@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, Table, Button, Spinner, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { FaArrowLeft, FaDownload, FaCalendarAlt, FaDollarSign, FaShoppingCart } from 'react-icons/fa';
+import { FaArrowLeft, FaDownload, FaCalendarAlt, FaDollarSign, FaShoppingCart, FaSync } from 'react-icons/fa';
 import api from '../../../services/api';
 import Loader from '../../UI/Loader';
 import Message from '../../UI/Message';
@@ -37,18 +37,11 @@ const Revenue = () => {
       // Fetch orders with date range filter
       const { data } = await api.get(`/orders?dateFrom=${dateRange.startDate}&dateTo=${dateRange.endDate}`);
       
-      // Log the raw data to see what's coming from the API
-      console.log('API Response:', data);
-      
       // Handle different response formats
       const ordersData = Array.isArray(data) ? data : (data?.orders || []);
       
-      console.log('Processed Orders Data:', ordersData);
-      
       // Filter to only include paid orders
       const paidOrders = ordersData.filter(order => order.isPaid);
-      
-      console.log('Paid Orders:', paidOrders);
       
       // Sort orders by date (newest first)
       const sortedOrders = paidOrders.sort((a, b) => 
@@ -70,9 +63,6 @@ const Revenue = () => {
   };
 
   const calculateRevenueStats = (orders) => {
-    // Log the orders being used for calculations
-    console.log('Calculating revenue stats from orders:', orders);
-    
     // Total revenue from all orders
     const totalRevenue = orders.reduce((sum, order) => {
       // Ensure totalPrice is a number
@@ -80,20 +70,12 @@ const Revenue = () => {
       return sum + price;
     }, 0);
     
-    console.log('Total Revenue:', totalRevenue);
-    
     // Get current date for time-based calculations
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const weekStart = new Date(today);
     weekStart.setDate(today.getDate() - today.getDay()); // Start of week (Sunday)
     const monthStart = new Date(now.getFullYear(), now.getMonth(), 1); // Start of month
-    
-    console.log('Date ranges:', {
-      today: today.toISOString(),
-      weekStart: weekStart.toISOString(),
-      monthStart: monthStart.toISOString()
-    });
     
     // Calculate revenue for different time periods
     const dailyRevenue = orders
@@ -117,31 +99,12 @@ const Revenue = () => {
       })
       .reduce((sum, order) => sum + (parseFloat(order.totalPrice) || 0), 0);
     
-    console.log('Period Revenues:', {
-      daily: dailyRevenue,
-      weekly: weeklyRevenue,
-      monthly: monthlyRevenue
-    });
-    
     // Calculate average order value
     const orderCount = orders.length;
     const averageOrderValue = orderCount > 0 ? totalRevenue / orderCount : 0;
     
-    console.log('Order Count:', orderCount);
-    console.log('Average Order Value:', averageOrderValue);
-    
     // Update the state with the calculated values
     setRevenueStats({
-      totalRevenue,
-      monthlyRevenue,
-      weeklyRevenue,
-      dailyRevenue,
-      orderCount,
-      averageOrderValue
-    });
-    
-    // Add this to verify the state is being updated
-    console.log('Updated Revenue Stats:', {
       totalRevenue,
       monthlyRevenue,
       weeklyRevenue,
@@ -184,26 +147,21 @@ const Revenue = () => {
     document.body.removeChild(link);
   };
 
-  // Add this function to force a re-render if needed
-  const refreshData = () => {
-    fetchRevenueData();
-  };
-
   return (
-    <div className="py-3 revenue-container">
+    <div className="revenue-container super-compact-revenue">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <div>
           <Link to="/admin/dashboard" className="btn btn-light btn-sm mb-2">
-            <FaArrowLeft className="me-1" /> Back to Dashboard
+            <FaArrowLeft className="me-1" /> <span className="back-text">Back to Dashboard</span>
           </Link>
-          <h2 className="mb-0">Revenue Analytics</h2>
+          <h2 className="mb-0 revenue-title">Revenue Analytics</h2>
         </div>
         <div>
-          <Button variant="outline-primary" size="sm" className="me-2" onClick={refreshData}>
-            Refresh Data
+          <Button variant="outline-primary" size="sm" className="me-2 refresh-btn" onClick={fetchRevenueData}>
+            <FaSync className="me-1" /> <span className="refresh-text">Refresh</span>
           </Button>
-          <Button variant="success" size="sm" onClick={exportToCSV}>
-            <FaDownload className="me-1" /> Export to CSV
+          <Button variant="success" size="sm" className="export-btn" onClick={exportToCSV}>
+            <FaDownload className="me-1" /> <span className="export-text">Export</span>
           </Button>
         </div>
       </div>
@@ -213,12 +171,12 @@ const Revenue = () => {
       {/* Date Range Filter */}
       <Card className="mb-3 filter-card">
         <Card.Body className="p-2">
-          <Row className="align-items-center">
+          <Row className="align-items-center g-2">
             <Col md={4} sm={12}>
               <h6 className="mb-0 filter-title"><FaCalendarAlt className="me-1" /> Filter by Date Range</h6>
             </Col>
-            <Col md={8} sm={12} className="mt-md-0 mt-2">
-              <Row>
+            <Col md={8} sm={12}>
+              <Row className="g-2">
                 <Col xs={6}>
                   <Form.Group className="mb-0">
                     <Form.Label className="small-label">From:</Form.Label>
@@ -252,8 +210,8 @@ const Revenue = () => {
       </Card>
       
       {/* Revenue Stats Cards */}
-      <Row className="mb-3 stats-row">
-        <Col md={3} sm={6} className="mb-2">
+      <Row className="mb-3 stats-row g-2">
+        <Col md={3} sm={6} xs={6}>
           <Card className="compact-card">
             <Card.Body className="p-2">
               <div className="d-flex justify-content-between align-items-center">
@@ -273,7 +231,7 @@ const Revenue = () => {
           </Card>
         </Col>
         
-        <Col md={3} sm={6} className="mb-2">
+        <Col md={3} sm={6} xs={6}>
           <Card className="compact-card">
             <Card.Body className="p-2">
               <div className="d-flex justify-content-between align-items-center">
@@ -293,7 +251,7 @@ const Revenue = () => {
           </Card>
         </Col>
         
-        <Col md={3} sm={6} className="mb-2">
+        <Col md={3} sm={6} xs={6}>
           <Card className="compact-card">
             <Card.Body className="p-2">
               <div className="d-flex justify-content-between align-items-center">
@@ -313,7 +271,7 @@ const Revenue = () => {
           </Card>
         </Col>
         
-        <Col md={3} sm={6} className="mb-2">
+        <Col md={3} sm={6} xs={6}>
           <Card className="compact-card">
             <Card.Body className="p-2">
               <div className="d-flex justify-content-between align-items-center">
@@ -334,8 +292,8 @@ const Revenue = () => {
         </Col>
       </Row>
       
-      <Row className="mb-3">
-        <Col md={6} className="mb-2">
+      <Row className="mb-3 g-2">
+        <Col md={6} xs={6}>
           <Card className="compact-card">
             <Card.Body className="p-2">
               <div className="d-flex justify-content-between align-items-center">
@@ -355,9 +313,9 @@ const Revenue = () => {
           </Card>
         </Col>
         
-        <Col md={6} className="mb-2">
+        <Col md={6} xs={6}>
           <Card className="compact-card">
-                        <Card.Body className="p-2">
+            <Card.Body className="p-2">
               <div className="d-flex justify-content-between align-items-center">
                 <div>
                   <p className="card-subtitle text-muted mb-1">Average Order Value</p>
@@ -377,50 +335,59 @@ const Revenue = () => {
       </Row>
       
       {/* Orders Table */}
-      <Card>
-        <Card.Header>
-          <h5 className="mb-0">Recent Orders (Paid Only)</h5>
+      <Card className="orders-table-card">
+        <Card.Header className="py-2 px-3">
+            <div className="d-flex justify-content-between align-items-center">
+      <h5 className="mb-0 table-title">Recent Orders (Paid Only)</h5>
+      <Link to="/admin/all-orders" className="btn btn-sm btn-outline-primary">
+        View All Orders
+      </Link>
+    </div>
         </Card.Header>
-        <Card.Body>
+        <Card.Body className="p-0">
           {loading ? (
             <div className="text-center py-3">
-              <Spinner animation="border" role="status">
+              <Spinner animation="border" role="status" size="sm">
                 <span className="visually-hidden">Loading...</span>
               </Spinner>
             </div>
           ) : orders.length === 0 ? (
-            <Message>No paid orders found in the selected date range</Message>
+            <div className="p-3">
+              <Message>No paid orders found in the selected date range</Message>
+            </div>
           ) : (
-            <Table responsive hover>
-              <thead>
-                <tr>
-                  <th>Order ID</th>
-                  <th>Date</th>
-                  <th>Customer</th>
-                  <th>Total</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.map((order) => (
-                  <tr key={order._id}>
-                    <td>#{order._id.substring(order._id.length - 6)}</td>
-                    <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                    <td>{order.user?.name || 'N/A'}</td>
-                    <td>${order.totalPrice.toFixed(2)}</td>
-                    <td>
-                      {order.status}
-                    </td>
-                    <td>
-                      <Link to={`/admin/orders/${order._id}`} className="btn btn-sm btn-info">
-                        View
-                      </Link>
-                    </td>
+            <div className="table-responsive">
+              <Table hover className="compact-table mb-0">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th className="date-col">Date</th>
+                    <th className="customer-col">Customer</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {orders.map((order) => (
+                    <tr key={order._id}>
+                      <td>#{order._id.substring(order._id.length - 6)}</td>
+                      <td className="date-col">{new Date(order.createdAt).toLocaleDateString()}</td>
+                      <td className="customer-col">{order.user?.name || 'N/A'}</td>
+                      <td>${order.totalPrice.toFixed(2)}</td>
+                      <td>
+                        {order.status}
+                      </td>
+                      <td>
+                          <Link to={`/admin/orders/${order._id}`} className="btn btn-sm btn-outline-primary view-btn">
+                          View
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
           )}
         </Card.Body>
       </Card>

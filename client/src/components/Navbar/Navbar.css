@@ -75,6 +75,11 @@
   left: 25%;
 }
 
+#userDropdown {
+  position: relative;
+  z-index: 1050;
+}
+
 /* Dropdown menu */
 .dropdown-menu {
   border: none;
@@ -84,6 +89,7 @@
   background-color: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  z-index: 1100; 
 }
 
 .dropdown-item {
@@ -185,7 +191,7 @@
   background-color: white;
   border-radius: 0.25rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
+  z-index: 1090;
   max-height: 300px;
   overflow-y: auto;
   margin-top: 0.25rem;
@@ -294,6 +300,7 @@
     max-height: 50vh;
     z-index: 1050;
   }
+  
 }
 
 /* Animations */
@@ -319,3 +326,81 @@
   }
 }
 
+.navbar .dropdown {
+  position: static; 
+}
+
+@media (min-width: 992px) {
+  .navbar .dropdown {
+    position: relative; 
+  }
+}
+
+@media (max-width: 991.98px) {
+
+  .navbar .dropdown-menu {
+    position: fixed !important;
+    top: auto !important;
+    left: 15px !important;
+    right: 15px !important;
+    width: calc(100% - 30px) !important;
+    z-index: 1200 !important;
+    transform: none !important;
+    margin-top: 10px !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+  }
+  
+
+  .navbar .dropdown-toggle {
+    position: relative;
+    z-index: 1100;
+  }
+  
+  .search-suggestions {
+    z-index: 1090;
+  }
+  
+  
+  .navbar-collapse {
+    z-index: 1080;
+  }
+}
+
+
+#userDropdown {
+  position: relative;
+  z-index: 1100;
+}
+
+.dropdown-menu-end {
+  z-index: 1200 !important;
+}
+
+.nav-link.dropdown-toggle {
+  cursor: pointer;
+  position: relative;
+  z-index: 1050;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-nav .dropdown-menu {
+    position: static !important;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .navbar-nav .dropdown-item {
+    padding-left: 2rem;
+    color: #333;
+  }
+  
+  .navbar-nav .dropdown-item:hover {
+    background-color: rgba(76, 175, 80, 0.1);
+  }
+}

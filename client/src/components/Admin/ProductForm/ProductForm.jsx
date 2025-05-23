@@ -182,26 +182,27 @@ const ProductForm = () => {
   }
 
   return (
-    <div className="py-3">
-      <Button 
-        variant="light" 
-        onClick={() => navigate('/admin/products')}
-        className="mb-3"
-      >
-        Go Back
-      </Button>
+    <div className="product-form-container py-3">
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2 className="mb-0 form-title">{id ? 'Edit Product' : 'Create Product'}</h2>
+        <Button 
+          variant="light" 
+          size="sm"
+          onClick={() => navigate('/admin/products')}
+          className="back-btn"
+        >
+          Go Back
+        </Button>
+      </div>
       
-      <Card className="mb-4">
-        <Card.Header>
-          <h2>{id ? 'Edit Product' : 'Create Product'}</h2>
-        </Card.Header>
-        <Card.Body>
-          {error && <Message variant="danger">{error}</Message>}
-          
+      {error && <Message variant="danger">{error}</Message>}
+      
+      <Card className="form-card mb-4">
+        <Card.Body className="p-3 p-md-4">
           <Form onSubmit={submitHandler}>
-            <Row>
+            <Row className="g-3">
               <Col md={6}>
-                <Form.Group controlId="name" className="mb-3">
+                <Form.Group controlId="name">
                   <Form.Label>Name*</Form.Label>
                   <Form.Control
                     type="text"
@@ -215,7 +216,7 @@ const ProductForm = () => {
               </Col>
               
               <Col md={6}>
-                <Form.Group controlId="price" className="mb-3">
+                <Form.Group controlId="price">
                   <Form.Label>Price*</Form.Label>
                   <Form.Control
                     type="number"
@@ -231,9 +232,9 @@ const ProductForm = () => {
               </Col>
             </Row>
             
-            <Row>
+            <Row className="g-3 mt-1">
               <Col md={6}>
-                <Form.Group controlId="brand" className="mb-3">
+                <Form.Group controlId="brand">
                   <Form.Label>Brand</Form.Label>
                   <Form.Control
                     type="text"
@@ -246,7 +247,7 @@ const ProductForm = () => {
               </Col>
               
               <Col md={6}>
-                <Form.Group controlId="category" className="mb-3">
+                <Form.Group controlId="category">
                   <Form.Label>Category*</Form.Label>
                   <Form.Select
                     name="category"
@@ -254,23 +255,22 @@ const ProductForm = () => {
                     onChange={handleInputChange}
                     required
                   >
-                       <option value="">Select Category</option>
-                   {categories && categories.length > 0 ? (
-                    categories.map((category) => (
-        <option key={category._id} value={category._id}>
-          {category._id} {category.count > 0 ? `(${category.count})` : ''}
-        </option>
-
-                        ))
-                     ) : (
-               // Fallback options if no categories are loaded
-                       <>
-                      <option value="Fruits">Fruits</option>
-                      <option value="Vegetables">Vegetables</option>
-                      <option value="Dairy">Dairy</option>
-                      <option value="Bakery">Bakery</option>
-                      <option value="Meat">Meat</option>
-                     <option value="Beverages">Beverages</option>
+                    <option value="">Select Category</option>
+                    {categories && categories.length > 0 ? (
+                      categories.map((category) => (
+                        <option key={category._id} value={category._id}>
+                          {category._id} {category.count > 0 ? `(${category.count})` : ''}
+                        </option>
+                      ))
+                    ) : (
+                      // Fallback options if no categories are loaded
+                      <>
+                        <option value="Fruits">Fruits</option>
+                        <option value="Vegetables">Vegetables</option>
+                        <option value="Dairy">Dairy</option>
+                        <option value="Bakery">Bakery</option>
+                        <option value="Meat">Meat</option>
+                        <option value="Beverages">Beverages</option>
                       </>
                     )}
                   </Form.Select>
@@ -278,9 +278,9 @@ const ProductForm = () => {
               </Col>
             </Row>
             
-            <Row>
+            <Row className="g-3 mt-1">
               <Col md={6}>
-                <Form.Group controlId="countInStock" className="mb-3">
+                <Form.Group controlId="countInStock">
                   <Form.Label>Count In Stock*</Form.Label>
                   <Form.Control
                     type="number"
@@ -295,7 +295,7 @@ const ProductForm = () => {
               </Col>
               
               <Col md={6}>
-                <Form.Group controlId="unit" className="mb-3">
+                <Form.Group controlId="unit">
                   <Form.Label>Unit*</Form.Label>
                   <Form.Select
                     name="unit"
@@ -318,9 +318,9 @@ const ProductForm = () => {
               </Col>
             </Row>
             
-            <Row>
+            <Row className="g-3 mt-1">
               <Col md={6}>
-                <Form.Group controlId="discount" className="mb-3">
+                <Form.Group controlId="discount">
                   <Form.Label>Discount (%)</Form.Label>
                   <Form.Control
                     type="number"
@@ -335,7 +335,7 @@ const ProductForm = () => {
               </Col>
               
               <Col md={6}>
-                <Form.Group controlId="isOrganic" className="mb-3 mt-4">
+                <Form.Group controlId="isOrganic" className="mt-4">
                   <Form.Check
                     type="checkbox"
                     label="Organic Product"
@@ -347,7 +347,7 @@ const ProductForm = () => {
               </Col>
             </Row>
             
-            <Form.Group controlId="image" className="mb-3">
+            <Form.Group controlId="image" className="mt-3">
               <Form.Label>Image*</Form.Label>
               <Form.Control
                 type="text"
@@ -365,17 +365,17 @@ const ProductForm = () => {
               />
               {uploading && <Loader />}
               {formData.image && (
-                <div className="mt-2">
+                <div className="mt-2 image-preview-container">
                   <img 
                     src={formData.image} 
                     alt="Product preview" 
-                    style={{ maxWidth: '200px', maxHeight: '200px' }} 
+                    className="image-preview" 
                   />
                 </div>
               )}
             </Form.Group>
             
-            <Form.Group controlId="description" className="mb-3">
+            <Form.Group controlId="description" className="mt-3">
               <Form.Label>Description</Form.Label>
               <Form.Control
                 as="textarea"
@@ -387,9 +387,11 @@ const ProductForm = () => {
               />
             </Form.Group>
             
-            <Button type="submit" variant="primary" disabled={loading}>
-              {loading ? 'Saving...' : id ? 'Update Product' : 'Create Product'}
-            </Button>
+            <div className="d-grid mt-4">
+              <Button type="submit" variant="primary" disabled={loading} className="submit-btn">
+                {loading ? 'Saving...' : id ? 'Update Product' : 'Create Product'}
+              </Button>
+            </div>
           </Form>
         </Card.Body>
       </Card>

@@ -45,6 +45,7 @@ import { CartProvider } from './context/CartContext.jsx';
 
 // CSS
 import './App.css';
+import AllOrders from './components/Admin/AllOrders/AllOrders.jsx';
 
 // Protected route component for admin routes
 const AdminRoute = ({ children }) => {
@@ -136,6 +137,12 @@ const AppContent = () => {
           <Route path="/admin/revenue" element={
             <AdminRoute>
               <Revenue />
+            </AdminRoute>
+          } />
+
+           <Route path="/admin/all-orders" element={
+            <AdminRoute>
+              <AllOrders />
             </AdminRoute>
           } />
 

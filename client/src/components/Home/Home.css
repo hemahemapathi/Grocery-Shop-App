@@ -380,3 +380,292 @@
 .floating-action-container {
   animation: fadeIn 0.3s ease-in-out;
 }
+/* Improve overall mobile responsiveness */
+@media (max-width: 767.98px) {
+  /* Adjust container padding for mobile */
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  /* Reduce font sizes for mobile */
+  .hero-title {
+    font-size: 1.6rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1.6rem;
+  }
+  
+  .section-header p {
+    font-size: 0.9rem;
+  }
+  
+  /* Adjust buttons to fit mobile width */
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Improve card layouts */
+  .card {
+    margin-bottom: 15px;
+  }
+  
+  .card-body {
+    padding: 0.75rem;
+  }
+  
+  /* Adjust feature cards */
+  .feature-card {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .feature-icon {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  
+  .feature-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .feature-card p {
+    font-size: 0.9rem;
+  }
+  
+  /* Adjust product cards */
+  .product-img-container {
+    height: 130px;
+  }
+  
+  .product-card .card-title {
+    font-size: 0.9rem;
+  }
+  
+  .discounted-price, .regular-price {
+    font-size: 1rem;
+  }
+  
+  /* Adjust category cards */
+  .category-img-container {
+    height: 90px;
+  }
+  
+  /* Adjust newsletter section */
+  .newsletter-container {
+    padding: 20px 15px;
+  }
+  
+  .newsletter-container h3 {
+    font-size: 1.3rem;
+  }
+  
+  .newsletter-container p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Specific fixes for extra small devices */
+@media (max-width: 575.98px) {
+  /* Fix hero buttons */
+  .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+  
+  .hero-buttons .btn {
+    width: 100%;
+    margin-right: 0 !important;
+  }
+  
+  /* Make all buttons more compact */
+  .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  /* Adjust grid for better mobile display */
+  .col-6 {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+  
+  .row {
+    margin-left: -7px;
+    margin-right: -7px;
+  }
+  
+  /* Fix newsletter form */
+  .newsletter-form .input-group {
+    flex-direction: column;
+  }
+  
+  .newsletter-form .form-control {
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  .newsletter-form .btn {
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  /* Make floating action button smaller */
+  .floating-action-container {
+    bottom: 15px;
+    right: 15px;
+  }
+  
+  .floating-action-button {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Fix for medium-sized mobile devices */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .hero-buttons .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Improve category and product cards for mobile */
+@media (max-width: 767.98px) {
+  /* Fix category cards */
+  .category-card {
+    margin-bottom: 15px;
+  }
+  
+  .category-img-container {
+    height: 120px;
+  }
+  
+  .category-card .card-body {
+    padding: 10px;
+  }
+  
+  .category-card .card-title {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+  
+  /* Fix product cards */
+  .product-card {
+    margin-bottom: 15px;
+  }
+  
+  .product-img-container {
+    height: 140px;
+  }
+  
+  .product-card .card-body {
+    padding: 10px;
+  }
+  
+  .product-card .card-title {
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .product-card .card-text {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+  
+  .product-card .btn {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+  }
+  
+  /* Fix grid spacing */
+  .col-6 {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+  .row {
+    margin-left: -5px;
+    margin-right: -5px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 575.98px) {
+  /* Further reduce sizes for very small screens */
+  .category-img-container {
+    height: 100px;
+  }
+  
+  .product-img-container {
+    height: 120px;
+  }
+  
+  /* Make sure "Add to Cart" button fits */
+  .product-card .btn {
+    padding: 0.25rem 0.4rem;
+    font-size: 0.75rem;
+  }
+  
+  /* Simplify price display */
+  .product-price {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .discounted-price, .regular-price {
+    font-size: 0.9rem;
+  }
+  
+  .original-price {
+    font-size: 0.8rem;
+  }
+}
+
+/* Hero buttons adjustments */
+.hero-buttons {
+  margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hero-buttons .btn {
+  padding: 0.5rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+/* Responsive adjustments for hero buttons */
+@media (max-width: 767.98px) {
+  .hero-buttons .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .hero-buttons .btn {
+    width: 100%;
+    margin-right: 0 !important;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}

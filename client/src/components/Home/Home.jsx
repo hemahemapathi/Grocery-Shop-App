@@ -107,35 +107,37 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* Hero Section */}
-      <section className="hero-section">
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-6 animate__animated animate__fadeInLeft">
-              <h1 className="hero-title">Fresh Groceries Delivered to Your Doorstep </h1>
-              
-              <p className="hero-subtitle">
-                Shop from our wide selection of fresh, organic produce and everyday essentials.
-              </p>
-              <div className="hero-buttons">
-                <Link to="/products" className="btn btn-success btn-lg me-3">
-                  Shop Now
-                </Link>
-                <Link to="/contact" className="btn btn-outline-success btn-lg">
-                  Contact Us
-                </Link>
-              </div>
-            </div>
-            <div className="col-lg-6 animate__animated animate__fadeInRight">
-              <img
-                src="/assets/images/home.jpeg"
-                alt="Fresh groceries"
-                className="img-fluid hero-image rounded shadow"
-              />
-            </div>
-          </div>
+    {/* Hero Section */}
+<section className="hero-section">
+  <div className="container">
+    <div className="row align-items-center">
+      <div className="col-lg-6 animate__animated animate__fadeInLeft">
+        <h1 className="hero-title">Fresh Groceries Delivered to Your Doorstep </h1>
+        
+        <p className="hero-subtitle">
+          Shop from our wide selection of fresh, organic produce and everyday essentials.
+        </p>
+        <div className="hero-buttons">
+          {/* Remove btn-lg class and adjust spacing */}
+          <Link to="/products" className="btn btn-success me-2">
+            Shop Now
+          </Link>
+          <Link to="/contact" className="btn btn-outline-success">
+            Contact Us
+          </Link>
         </div>
-      </section>
+      </div>
+      <div className="col-lg-6 animate__animated animate__fadeInRight">
+        <img
+          src="/assets/images/home.jpeg"
+          alt="Fresh groceries"
+          className="img-fluid hero-image rounded shadow"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* Features Section */}
       <section className="features-section py-5">
@@ -212,124 +214,128 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="categories-section py-5 bg-light">
-        <div className="container">
-          <div className="section-header text-center mb-5">
-            <h2>Shop by Category</h2>
-            <p>Browse our wide selection of fresh products</p>
-          </div>
+    {/* Categories Section - Modified for better mobile responsiveness */}
+<section className="categories-section py-5 bg-light">
+  <div className="container">
+    <div className="section-header text-center mb-5">
+      <h2>Shop by Category</h2>
+      <p>Browse our wide selection of fresh products</p>
+    </div>
 
-          {loading ? (
-            <div className="text-center">
-              <div className="spinner-border text-success" role="status">
-                <span className="visually-hidden">Loading...</span>
+    {loading ? (
+      <div className="text-center">
+        <div className="spinner-border text-success" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    ) : (
+      <div className="row">
+        {/* Show only the first 4 categories */}
+        {categories.slice(0, 4).map((category) => (
+          <div key={category._id} className="col-6 col-sm-6 col-md-3 mb-3">
+            <Link to={`/products?category=${category._id}`} className="category-card">
+              <div className="card h-100 border-0 shadow-sm">
+                <div className="category-img-container">
+                  <img
+                    src={`/assets/images/categories/${category._id.toLowerCase()}.avif`}
+                    className="card-img-top"
+                    alt={category._id}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = '/assets/images/categories/default.jpg';
+                    }}
+                  />
+                </div>
+                <div className="card-body text-center p-2">
+                  <h5 className="card-title mb-0">{category._id}</h5>
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className="row">
-              {/* Show only the first 4 categories */}
-              {categories.slice(0, 4).map((category) => (
-                <div key={category._id} className="col-6 col-sm-6 col-md-3 mb-4">
-                  <Link to={`/products?category=${category._id}`} className="category-card">
-                    <div className="card h-100 border-0 shadow-sm">
-                      <div className="category-img-container">
-                        <img
-                          src={`/assets/images/categories/${category._id.toLowerCase()}.avif`}
-                          className="card-img-top"
-                          alt={category._id}
-                          onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = '/assets/images/categories/default.jpg';
-                          }}
-                        />
-                      </div>
-                      <div className="card-body text-center">
-                        <h5 className="card-title">{category._id}</h5>
-                      </div>
+            </Link>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <div className="text-center mt-4">
+      <Link to="/products" className="btn btn-outline-success">
+        View All Categories <FaArrowRight className="ms-2" />
+      </Link>
+    </div>
+  </div>
+</section>
+
+
+    {/* Bestseller Products Section - Modified for better mobile responsiveness */}
+<section className="recent-products-section py-5">
+  <div className="container">
+    <div className="section-header text-center mb-5">
+      <h2>BestSeller Products</h2>
+      <p>Check out our latest additions</p>
+    </div>
+
+    {loadingBestsellers ? (
+      <div className="text-center">
+        <div className="spinner-border text-success" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    ) : (
+      <>
+        {bestsellerProducts && bestsellerProducts.length > 0 ? (
+          <div className="row">
+            {bestsellerProducts.map((product) => (
+              <div key={product._id} className="col-6 col-sm-6 col-md-3 mb-3">
+                <div className="card h-100 border-0 shadow-sm product-card">
+                  <Link to={`/product/${product._id}`}>
+                    <div className="product-img-container">
+                      <img
+                        src={product.image}
+                        className="card-img-top"
+                        alt={product.name}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = '/assets/images/products/default.jpg';
+                        }}
+                      />
                     </div>
                   </Link>
+                  <div className="card-body d-flex flex-column">
+                    <h5 className="card-title">{product.name}</h5>
+                    <p className="card-text mb-2">
+                      ${calculateDiscountedPrice(product.price, product.discount)}
+                      {product.discount > 0 && (
+                        <small className="text-muted text-decoration-line-through ms-2">
+                          ${product.price}
+                        </small>
+                      )}
+                    </p>
+                    <button
+                      className="btn btn-success mt-auto"
+                      onClick={() => addToCart(product._id, 1)}
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
-              ))}
-            </div>
-          )}
-
-          <div className="text-center mt-4">
-            <Link to="/products" className="btn btn-outline-success">
-              View All Categories <FaArrowRight className="ms-2" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Bestseller Products Section */}
-      <section className="recent-products-section py-5">
-        <div className="container">
-          <div className="section-header text-center mb-5">
-            <h2>BestSeller Products</h2>
-            <p>Check out our latest additions</p>
-          </div>
-
-          {loadingBestsellers ? (
-            <div className="text-center">
-              <div className="spinner-border text-success" role="status">
-                <span className="visually-hidden">Loading...</span>
               </div>
-            </div>
-          ) : (
-            <>
-              {bestsellerProducts && bestsellerProducts.length > 0 ? (
-                <div className="row">
-                  {bestsellerProducts.map((product) => (
-                    <div key={product._id} className="col-6 col-sm-6 col-md-3 mb-4">
-                      <div className="card h-100 border-0 shadow-sm">
-                        <Link to={`/product/${product._id}`}>
-                          <img
-                            src={product.image}
-                            className="card-img-top"
-                            alt={product.name}
-                            onError={(e) => {
-                              e.target.onerror = null;
-                              e.target.src = '/assets/images/products/default.jpg';
-                            }}
-                          />
-                        </Link>
-                        <div className="card-body">
-                          <h5 className="card-title">{product.name}</h5>
-                          <p className="card-text">
-                            ${calculateDiscountedPrice(product.price, product.discount)}
-                            {product.discount > 0 && (
-                              <small className="text-muted text-decoration-line-through ms-2">
-                                ${product.price}
-                              </small>
-                            )}
-                          </p>
-                          <button
-                            className="btn btn-success w-100"
-                            onClick={() => addToCart(product._id, 1)}
-                          >
-                            Add to Cart
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center">
-                  <p>No bestseller products available at the moment.</p>
-                </div>
-              )}
-            </>
-          )}
-
-          <div className="text-center mt-4">
-            <Link to="/products" className="btn btn-outline-success">
-              View All Products <FaArrowRight className="ms-2" />
-            </Link>
+            ))}
           </div>
-        </div>
-      </section>
+        ) : (
+          <div className="text-center">
+            <p>No bestseller products available at the moment.</p>
+          </div>
+        )}
+      </>
+    )}
+
+    <div className="text-center mt-4">
+      <Link to="/products" className="btn btn-outline-success">
+        View All Products <FaArrowRight className="ms-2" />
+      </Link>
+    </div>
+  </div>
+</section>
+
 
               {/* Customer Reviews Section */}
       <section className="reviews-section py-5">

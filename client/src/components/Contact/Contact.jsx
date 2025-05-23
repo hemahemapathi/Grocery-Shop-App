@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import emailjs from '@emailjs/browser';
 import './Contact.css';
@@ -43,8 +42,8 @@ const Contact = () => {
     try {
       // Send email using EmailJS
       const result = await emailjs.sendForm(
-     'service_a17xmpb', // Replace with your EmailJS service ID
-     'template_oyvvpvz', // Replace with your EmailJS template ID
+        'service_a17xmpb', // Replace with your EmailJS service ID
+        'template_oyvvpvz', // Replace with your EmailJS template ID
         form.current
       );
       
@@ -71,10 +70,9 @@ const Contact = () => {
     <Container className="contact-container py-5">
       <h1 className="text-center mb-5">Contact Us</h1>
       
-      {/* Rest of your component remains the same */}
-      <Row className="mb-5">
-        <Col lg={6}>
-          <div className="contact-form-container">
+      <Row className="justify-content-center">
+        <Col lg={8} md={10} sm={12}>
+          <div className="contact-form-container p-4 shadow-sm rounded">
             <h2 className="mb-4">Send Us a Message</h2>
             <Form ref={form} noValidate validated={validated} onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="contactName">
@@ -149,11 +147,6 @@ const Contact = () => {
             </Form>
           </div>
         </Col>
-
-      
-
-        
-        {/* Map and other sections remain the same */}
       </Row>
     </Container>
   );

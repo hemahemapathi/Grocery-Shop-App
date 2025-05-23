@@ -43,6 +43,18 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+
+useEffect(() => {
+  
+  if (typeof bootstrap !== 'undefined') {
+    const dropdownElementList = document.querySelectorAll('.dropdown-toggle');
+    dropdownElementList.forEach(dropdownToggleEl => {
+      new bootstrap.Dropdown(dropdownToggleEl);
+    });
+  }
+}, []);
+
+
   // Update cart count from localStorage
   useEffect(() => {
     const updateCartCount = () => {
@@ -69,9 +81,54 @@ const Navbar = () => {
     };
   }, []);
 
+  // Auto-close navbar on link click for mobile
+  useEffect(() => {
+    // Get all nav links
+    const navLinks = document.querySelectorAll('.navbar-nav a.nav-link, .navbar-nav .dropdown-item, .navbar-brand, .auth-buttons .btn');
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    
+    const closeNavbar = () => {
+      if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+        navbarCollapse.classList.remove('show');
+        if (navbarToggler) {
+          navbarToggler.classList.add('collapsed');
+          navbarToggler.setAttribute('aria-expanded', 'false');
+        }
+      }
+    };
+    
+    // Add click event to all nav links
+    navLinks.forEach(link => {
+      link.addEventListener('click', closeNavbar);
+    });
+    
+    // Cleanup
+    return () => {
+      navLinks.forEach(link => {
+        link.removeEventListener('click', closeNavbar);
+      });
+    };
+  }, []);
+
+  // Function to close the navbar manually
+  const closeNavbar = () => {
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    
+    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+      navbarCollapse.classList.remove('show');
+      if (navbarToggler) {
+        navbarToggler.classList.add('collapsed');
+        navbarToggler.setAttribute('aria-expanded', 'false');
+      }
+    }
+  };
+
   const handleLogout = () => {
     logout();
     navigate('/');
+    closeNavbar(); // Close navbar is handled by the useEffect
   };
 
   // Function to check if a link is active
@@ -107,6 +164,7 @@ const Navbar = () => {
       navigate(`/products?keyword=${encodeURIComponent(searchTerm.trim())}`);
       setSearchTerm('');
       setShowSuggestions(false);
+      closeNavbar(); // Close navbar after search
     }
   };
 
@@ -115,6 +173,13 @@ const Navbar = () => {
     navigate(`/product/${productId}`);
     setSearchTerm('');
     setShowSuggestions(false);
+    closeNavbar(); // Close navbar after clicking suggestion
+  };
+
+  // Handle category click
+  const handleCategoryClick = (categoryId) => {
+    navigate(`/products?category=${categoryId}`);
+    closeNavbar(); // Close navbar after clicking category
   };
 
   return (
@@ -149,47 +214,59 @@ const Navbar = () => {
               <Link className={`nav-link ${isActive('/products') ? 'active' : ''}`} to="/products">Products</Link>
             </li>
             <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="categoriesDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Categories
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="categoriesDropdown">
-                {categories && categories.length > 0 ? (
-                  <>
-                    {categories.map((category) => (
-                      <li key={category._id}>
-                        <Link 
-                          className="dropdown-item" 
-                          to={`/products?category=${category._id}`}
-                        >
-                          {category._id} ({category.count})
-                        </Link>
-                      </li>
-                    ))}
-                    <li><hr className="dropdown-divider" /></li>
-                  </>
-                ) : (
-                  <>
-                    <li><Link className="dropdown-item" to="/products?category=Fruits">Fruits</Link></li>
-                    <li><Link className="dropdown-item" to="/products?category=Vegetables">Vegetables</Link></li>
-                    <li><Link className="dropdown-item" to="/products?category=Dairy">Dairy</Link></li>
-                    <li><Link className="dropdown-item" to="/products?category=Bakery">Bakery</Link></li>
-                    <li><hr className="dropdown-divider" /></li>
-                  </>
-                )}
-                <li><Link className="dropdown-item" to="/products">All Products</Link></li>
-              </ul>
-            </li>
+  <a
+    className="nav-link dropdown-toggle"
+    href="#"
+    id="categoriesDropdown"
+    role="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+    onClick={(e) => {
+      // Prevent navigation
+      e.preventDefault();
+      // Toggle dropdown manually if Bootstrap JS is not available
+      if (typeof bootstrap === 'undefined') {
+        const dropdownMenu = e.currentTarget.nextElementSibling;
+        if (dropdownMenu) {
+          dropdownMenu.classList.toggle('show');
+        }
+      }
+    }}
+  >
+    Categories
+  </a>
+  <ul className="dropdown-menu" aria-labelledby="categoriesDropdown">
+    {categories && categories.length > 0 ? (
+      <>
+        {categories.map((category) => (
+          <li key={category._id}>
+            <Link 
+              className="dropdown-item" 
+              to={`/products?category=${category._id}`}
+              onClick={() => closeNavbar()}
+            >
+              {category._id} ({category.count})
+            </Link>
+          </li>
+        ))}
+        <li><hr className="dropdown-divider" /></li>
+      </>
+    ) : (
+      <>
+        <li><Link className="dropdown-item" to="/products?category=Fruits" onClick={() => closeNavbar()}>Fruits</Link></li>
+        <li><Link className="dropdown-item" to="/products?category=Vegetables" onClick={() => closeNavbar()}>Vegetables</Link></li>
+        <li><Link className="dropdown-item" to="/products?category=Dairy" onClick={() => closeNavbar()}>Dairy</Link></li>
+        <li><Link className="dropdown-item" to="/products?category=Bakery" onClick={() => closeNavbar()}>Bakery</Link></li>
+        <li><hr className="dropdown-divider" /></li>
+      </>
+    )}
+    <li><Link className="dropdown-item" to="/products" onClick={() => closeNavbar()}>All Products</Link></li>
+  </ul>
+</li>
+
             <li className="nav-item">
               <Link className={`nav-link ${isActive('/contact') ? 'active' : ''}`} to="/contact">Contact</Link>
             </li>
-            {/* Removed Wishlist from here */}
           </ul>
 
           {/* Search Bar - Desktop */}
@@ -260,13 +337,13 @@ const Navbar = () => {
           <div className="d-flex align-items-center">
             {/* Wishlist Icon - Added here next to cart */}
             {user && (
-              <Link to="/wishlist" className="nav-icon-link position-relative me-3" title="Wishlist">
+              <Link to="/wishlist" className="nav-icon-link position-relative me-3" title="Wishlist" onClick={() => closeNavbar()}>
                 <FaHeart />
               </Link>
             )}
             
             {/* Cart Icon */}
-            <Link to="/cart" className="nav-icon-link position-relative me-3" title="Shopping Cart">
+            <Link to="/cart" className="nav-icon-link position-relative me-3" title="Shopping Cart" onClick={() => closeNavbar()}>
               <FaShoppingCart size={20} />
               {cartCount > 0 && (
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -291,13 +368,13 @@ const Navbar = () => {
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                   <li>
-                    <Link className="dropdown-item" to="/profile">
+                    <Link className="dropdown-item" to="/profile" onClick={() => closeNavbar()}>
                       <FaUser className="me-2" /> My Profile
                     </Link>
                   </li>
                   {isAdmin && (
                     <li>
-                      <Link className="dropdown-item" to="/admin">
+                      <Link className="dropdown-item" to="/admin" onClick={() => closeNavbar()}>
                         <FaUserCog className="me-2" /> Admin Dashboard
                       </Link>
                     </li>
@@ -312,15 +389,15 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="auth-buttons">
-                <Link to="/login" className="btn btn-outline-success me-2">Login</Link>
-                <Link to="/register" className="btn btn-success d-none d-md-inline">Register</Link>
+                <Link to="/login" className="btn btn-outline-success me-2" onClick={() => closeNavbar()}>Login</Link>
+                <Link to="/register" className="btn btn-success d-none d-md-inline" onClick={() => closeNavbar()}>Register</Link>
               </div>
             )}
           </div>
         </div>
       </div>
       
-      {/* Search Bar - Mobile */}
+          {/* Search Bar - Mobile */}
       <div className="container mt-2 d-md-none">
         <div className="search-container" ref={searchRef}>
           <form className="search-form w-100" onSubmit={handleSearch}>
@@ -375,6 +452,7 @@ const Navbar = () => {
                       navigate(`/products?keyword=${encodeURIComponent(searchTerm.trim())}`);
                       setSearchTerm('');
                       setShowSuggestions(false);
+                      closeNavbar();
                     }
                   }}
                 >
@@ -390,3 +468,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

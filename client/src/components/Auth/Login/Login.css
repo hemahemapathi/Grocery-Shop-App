@@ -6,11 +6,11 @@
   border-radius: 10px;
   transition: transform 0.3s ease;
 }
+
 input::placeholder {
   color: #999;
   opacity: 1;
 }
-
 
 .login-container .card:hover {
   transform: translateY(-5px);
@@ -19,6 +19,7 @@ input::placeholder {
 .login-container h1 {
   color: #4caf50;
   font-weight: 600;
+  font-size: 2rem;
 }
 
 .login-container .form-control:focus {
@@ -49,6 +50,22 @@ input::placeholder {
   color: #495057;
 }
 
+/* Password input group styling */
+.password-input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  width: 100%;
+}
+
+.password-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.375rem 0.75rem;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -63,3 +80,125 @@ input::placeholder {
 .animate__fadeIn {
   animation-name: fadeIn;
 }
+
+/* Mobile responsiveness improvements */
+@media (max-width: 767.98px) {
+  .login-container h1 {
+    font-size: 1.75rem;
+  }
+  
+  .login-container .card-body {
+    padding: 1.5rem;
+  }
+  
+  .login-container .form-label {
+    font-size: 0.9rem;
+  }
+  
+  .login-container .form-control {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .login-container .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .login-container .form-check-label {
+    font-size: 0.85rem;
+  }
+  
+  .login-container p {
+    font-size: 0.9rem;
+  }
+  
+  /* Password field responsive fixes */
+  .password-input-group {
+    flex-wrap: nowrap;
+  }
+  
+  .password-toggle-btn {
+    padding: 0.375rem 0.5rem;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 575.98px) {
+  .login-container h1 {
+    font-size: 1.5rem;
+  }
+  
+  .login-container .card-body {
+    padding: 1.25rem;
+  }
+  
+  .login-container .form-control {
+    font-size: 0.9rem;
+  }
+  
+  .login-container .btn {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+
+  .password-toggle-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  .password-toggle-btn svg {
+    min-width: 16px;
+  }
+}
+
+
+.password-field-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-field-container input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.password-toggle-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-left: 1px solid #ced4da;
+  color: #6c757d;
+  cursor: pointer;
+}
+
+.password-toggle-button:hover {
+  background-color: #f8f9fa;
+  color: #495057;
+}
+
+
+.password-field-container input {
+  border-top-right-radius: 0.25rem !important;
+  border-bottom-right-radius: 0.25rem !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 575.98px) {
+  .password-toggle-button {
+    width: 35px;
+  }
+  
+  .password-field-container input {
+    padding-right: 35px;
+  }
+}
+

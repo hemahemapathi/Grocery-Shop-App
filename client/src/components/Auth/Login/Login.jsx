@@ -47,12 +47,12 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container container mt-5 animate__animated animate__fadeIn">
+    <div className="login-container container mt-4 mt-md-5 animate__animated animate__fadeIn">
       <div className="row justify-content-center">
-        <div className="col-md-6">
+        <div className="col-md-8 col-lg-6">
           <div className="card shadow-lg border-0">
-            <div className="card-body p-5">
-              <h1 className="text-center mb-4">
+            <div className="card-body p-4 p-md-5">
+              <h1 className="text-center mb-3 mb-md-4">
                 <FaSignInAlt className="me-2" /> Login
               </h1>
               <p className="text-center text-muted mb-4">Sign in to your account</p>
@@ -71,36 +71,50 @@ const Login = () => {
                    placeholder="Enter your email"
                    required
                   />
-
                 </div>
+              
+
+<div className="mb-4">
+  <label htmlFor="password" className="form-label">Password</label>
+  <div className="password-field-container">
+    <input
+      type={showPassword ? 'text' : 'password'}
+      className="form-control"
+      id="password"
+      name="password"
+      value={password}
+      onChange={onChange}
+      autoComplete="current-password"
+      placeholder="Enter password"
+      required
+    />
+    <button
+      type="button"
+      className="password-toggle-button"
+      onClick={togglePasswordVisibility}
+    >
+      {showPassword ? <FaEyeSlash /> : <FaEye />}
+    </button>
+  </div>
+</div>
+
                 
-                <div className="mb-4">
-                  <label htmlFor="password" className="form-label">Password</label>
-                  <div className="input-group">
-                  <input
-                  type={showPassword ? 'text' : 'password'}
-                  className="form-control"
-                  id="password"
-                  name="password"
-                  value={password}
-                  onChange={onChange}
-                  autoComplete="current-password"
-                  placeholder="Enter your password"
-                  required
+                <div className="mb-3 d-flex justify-content-between align-items-center flex-wrap">
+                  <Form.Check 
+                    type="checkbox" 
+                    label="Remember me" 
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    className="mb-2 mb-md-0"
                   />
-                    <button
-                      type="button"
-                      className="btn btn-outline-secondary"
-                      onClick={togglePasswordVisibility}
-                    >
-                      {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </button>
-                  </div>
+                  <Link to="/forgot-password" className="text-decoration-none text-success">
+                    Forgot Password?
+                  </Link>
                 </div>
                 
                 <button
                   type="submit"
-                  className="btn btn-success w-100 py-2 mb-3"
+                  className="btn btn-success w-100 py-2 mb-3 mt-2"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -113,20 +127,6 @@ const Login = () => {
                   )}
                 </button>
               </form>
-
-
-       <Form.Group className="mb-3 d-flex justify-content-between">
-        <Form.Check 
-            type="checkbox" 
-           label="Remember me" 
-           checked={rememberMe}
-           onChange={(e) => setRememberMe(e.target.checked)}
-          />
-        <Link to="/forgot-password" className="text-decoration-none">
-          Forgot Password?
-           </Link>
-        </Form.Group>
-
               
               <div className="text-center mt-3">
                 <p>

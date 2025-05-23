@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Card, Badge, Form, Row, Col } from 'react-bootstrap';
-import { FaSearch } from 'react-icons/fa';
+import { Table, Card, Badge, Form, Row, Col, Button, Spinner } from 'react-bootstrap';
+import { FaSearch, FaSync, FaUserEdit, FaTrash, FaUserPlus } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import api from '../../../services/api';
 import Loader from '../../UI/Loader';
@@ -13,6 +13,7 @@ const UserList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     fetchUsers();
@@ -65,40 +66,68 @@ const UserList = () => {
     // The filtering is handled in the useEffect
   };
 
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await fetchUsers();
+    setRefreshing(false);
+  };
+
   return (
-      <div className="py-3 admin-container">
+    <div className="py-3 admin-container user-list-container">
       <Row className="align-items-center mb-3">
-        <Col>
-          <h2 className="mb-0">Users</h2>
+        <Col xs={8} md={6}>
+          <h2 className="mb-0 user-list-title">Users</h2>
           <p className="text-muted small-text">Total users: {users.length}</p>
+        </Col>
+        <Col xs={4} md={6} className="text-end">
+          <Button 
+            variant="outline-primary" 
+            size="sm"
+            onClick={handleRefresh}
+            disabled={refreshing}
+            className="refresh-btn"
+          >
+            {refreshing ? (
+              <>
+                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" className="me-1" />
+                <span className="refresh-text">Refreshing...</span>
+              </>
+            ) : (
+              <>
+                <FaSync className="me-1" /> <span className="refresh-text">Refresh</span>
+              </>
+            )}
+          </Button>
         </Col>
       </Row>
       
       <Card className="mb-4 filter-card">
-        <Card.Body>
+        <Card.Body className="p-3">
           <Form onSubmit={handleSearch}>
-            <Row>
-              <Col md={6}>
-                <Form.Group className="mb-3 d-flex">
+            <Row className="align-items-center">
+              <Col md={6} className="mb-2 mb-md-0">
+                <Form.Group className="d-flex">
                   <Form.Control
                     type="text"
                     placeholder="Search users by name or email..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
+                    className="search-input"
                   />
-                  <button type="submit" className="btn btn-outline-primary ms-2">
+                  <Button type="submit" variant="outline-primary" className="ms-2 search-btn">
                     <FaSearch />
-                  </button>
+                  </Button>
                 </Form.Group>
               </Col>
-              <Col md={6} className="text-end">
-                <button 
+              <Col md={6} className="text-md-end">
+                <Button 
                   type="button" 
-                  className="btn btn-outline-secondary"
+                  variant="outline-secondary"
                   onClick={() => setSearchTerm('')}
+                  className="reset-btn"
                 >
                   Reset
-                </button>
+                </Button>
               </Col>
             </Row>
           </Form>
@@ -111,41 +140,40 @@ const UserList = () => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-        <Card className="data-card">
-        <Card.Body className="p-2">
+          <Card className="data-card">
+            <Card.Body className="p-0">
               {filteredUsers.length === 0 ? (
                 <Message>No users found</Message>
               ) : (
                 <div className="table-responsive">
-                <Table hover className="compact-table">
-
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Role</th>
-                      <th>Created At</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredUsers.map((user) => (
-                      <tr key={user._id}>
-                        <td>{user._id.substring(user._id.length - 6)}</td>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-                        <td>
-                          {user.role === 'admin' ? (
-                            <Badge bg="primary">Admin</Badge>
-                          ) : (
-                            <Badge bg="secondary">Customer</Badge>
-                          )}
-                        </td>
-                        <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+                  <Table hover className="user-table mb-0">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Created At</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </Table>
+                    </thead>
+                    <tbody>
+                      {filteredUsers.map((user) => (
+                        <tr key={user._id}>
+                          <td className="user-id">{user._id.substring(user._id.length - 6)}</td>
+                          <td className="user-name">{user.name}</td>
+                          <td className="user-email">{user.email}</td>
+                          <td className="user-role">
+                            {user.role === 'admin' ? (
+                              <Badge bg="primary">Admin</Badge>
+                            ) : (
+                              <Badge bg="secondary">Customer</Badge>
+                            )}
+                          </td>
+                          <td className="user-date">{new Date(user.createdAt).toLocaleDateString()}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
                 </div>
               )}
             </Card.Body>
@@ -153,7 +181,7 @@ const UserList = () => {
           
           <div className="d-flex justify-content-between align-items-center mt-3">
             <div>
-              <p className="mb-0">Showing {filteredUsers.length} of {users.length} users</p>
+              <p className="mb-0 results-text">Showing {filteredUsers.length} of {users.length} users</p>
             </div>
           </div>
         </>

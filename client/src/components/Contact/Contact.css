@@ -1,108 +1,213 @@
+/* Responsive styles for Contact component */
 .contact-container {
-    padding-top: 2rem;
-    padding-bottom: 3rem;
-  }
-  
-  .contact-card {
-    height: 100%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .contact-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  }
-  
+  padding: 2rem 1rem;
+}
 
-  
-  .contact-form-container{ 
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    height: 100%;
-    width: 200%;
+.contact-form-container,
+.contact-info-container {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .contact-form-container {
+    margin-bottom: 2rem;
   }
   
- 
-  
-  .social-media-section {
-    margin-top: 3rem;
+  .contact-container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
   }
   
-  .social-icons {
+  .contact-container h2 {
+    font-size: 1.5rem;
+  }
+}
+
+.contact-info .card {
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.contact-info .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact-icon {
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icon {
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.2);
+}
+
+/* Improve overall mobile responsiveness */
+@media (max-width: 767.98px) {
+  /* Adjust container padding for mobile */
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  /* Reduce font sizes for mobile */
+  .hero-title {
+    font-size: 1.6rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1.6rem;
+  }
+  
+  .section-header p {
+    font-size: 0.9rem;
+  }
+  
+  /* Adjust buttons to fit mobile width */
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Improve card layouts */
+  .card {
+    margin-bottom: 15px;
+  }
+  
+  .card-body {
+    padding: 0.75rem;
+  }
+  
+  /* Adjust feature cards */
+  .feature-card {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .feature-icon {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  
+  .feature-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .feature-card p {
+    font-size: 0.9rem;
+  }
+  
+  /* Adjust product cards */
+  .product-img-container {
+    height: 130px;
+  }
+  
+  .product-card .card-title {
+    font-size: 0.9rem;
+  }
+  
+  .discounted-price, .regular-price {
+    font-size: 1rem;
+  }
+  
+  /* Adjust category cards */
+  .category-img-container {
+    height: 90px;
+  }
+  
+  /* Adjust newsletter section */
+  .newsletter-container {
+    padding: 20px 15px;
+  }
+  
+  .newsletter-container h3 {
+    font-size: 1.3rem;
+  }
+  
+  .newsletter-container p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Specific fixes for extra small devices */
+@media (max-width: 575.98px) {
+  /* Fix hero buttons */
+  .hero-buttons {
     display: flex;
-    justify-content: center;
-    gap: 1.5rem;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
   }
   
-  .social-icon {
-    font-size: 2rem;
-    color: #4CAF50;
-    transition: transform 0.3s ease, color 0.3s ease;
+  .hero-buttons .btn {
+    width: 100%;
+    margin-right: 0 !important;
   }
   
-  .social-icon:hover {
-    transform: scale(1.2);
-    color: #2E7D32;
+  /* Make all buttons more compact */
+  .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
   }
   
-  .faq-section {
-    margin-top: 3rem;
+  /* Adjust grid for better mobile display */
+  .col-6 {
+    padding-left: 7px;
+    padding-right: 7px;
   }
   
-  .faq-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+  .row {
+    margin-left: -7px;
+    margin-right: -7px;
   }
   
-  .faq-item {
-    background-color: #fff;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+  /* Fix newsletter form */
+  .newsletter-form .input-group {
+    flex-direction: column;
   }
   
-  .faq-item:hover {
-    transform: translateY(-5px);
+  .newsletter-form .form-control {
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 100%;
   }
   
-  .faq-item h4 {
-    color: #2E7D32;
-    margin-bottom: 0.75rem;
+  .newsletter-form .btn {
+    border-radius: 4px;
+    width: 100%;
   }
   
-  /* Form styling */
-  .form-control:focus {
-    border-color: #4CAF50;
-    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+  /* Make floating action button smaller */
+  .floating-action-container {
+    bottom: 15px;
+    right: 15px;
   }
   
-  .btn-primary {
-    background-color: #4CAF50;
-    border-color: #4CAF50;
+  .floating-action-button {
+    width: 35px;
+    height: 35px;
   }
-  
-  .btn-primary:hover,
-  .btn-primary:focus {
-    background-color: #2E7D32;
-    border-color: #2E7D32;
+}
+
+/* Fix for medium-sized mobile devices */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .hero-buttons .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
   }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .contact-form-container,
-    .contact-map-container {
-      margin-bottom: 2rem;
-    }
-    
-    .faq-container {
-      grid-template-columns: 1fr;
-    }
-  }
-  
+}

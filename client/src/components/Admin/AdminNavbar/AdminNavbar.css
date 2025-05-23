@@ -76,14 +76,13 @@
   }
 }
 
-/* Add or update these styles in your AdminNavbar.css file */
+
 .dropdown-menu {
   position: absolute;
-  z-index: 1050 !important; /* Higher z-index to ensure it appears above other elements */
+  z-index: 1050 !important;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
-/* Make sure the dropdown toggle button has a proper z-index as well */
 .dropdown-toggle {
   z-index: 1000;
 }
