@@ -23,7 +23,7 @@ const processProductData = (product) => {
 };
 
 export const getProductById = async (id) => {
-  const response = await axios.get(`/api/products/${id}`);
+  const response = await api.get(`/api/products/${id}`);
   return processProductData(response.data);
 };
 
