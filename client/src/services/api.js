@@ -22,7 +22,7 @@ const processProductData = (product) => {
   return product;
 };
 
-const getProductById = async (id) => {
+export const getProductById = async (id) => {
   const response = await axios.get(`/api/products/${id}`);
   return processProductData(response.data);
 };
