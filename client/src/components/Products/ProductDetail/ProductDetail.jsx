@@ -45,7 +45,7 @@ const ProductDetail = () => {
   const fetchProduct = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`/api/products/${id}`);
+      const { data } = await api.get(`/api/products/${id}`);
       setProduct(data);
       if (data && data.category) {
         fetchRelatedProducts(data.category);
@@ -59,7 +59,7 @@ const ProductDetail = () => {
 
   const fetchRelatedProducts = async (category) => {
     try {
-      const { data } = await axios.get(`/api/products?category=${category}&limit=4`);
+      const { data } = await api.get(`/api/products?category=${category}&limit=4`);
       // Check if data.products exists before filtering
       if (data && data.products) {
         // Filter out the current product
