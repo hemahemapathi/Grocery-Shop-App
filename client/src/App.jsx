@@ -93,9 +93,15 @@ const AppContent = () => {
   const location = useLocation();
   const isAdminPage = location.pathname.startsWith('/admin');
   
+  // Define paths where navbar should be hidden
+  const hideNavbarPaths = ['/login', '/register', '/forgot-password', '/reset-password'];
+  const shouldShowNavbar = !hideNavbarPaths.some(path => 
+    location.pathname === path || location.pathname.startsWith(path + '/')
+  );
+  
   return (
     <div className="app-container">
-      {isAdminPage ? <AdminNavbar /> : <Navbar />}
+      {shouldShowNavbar && (isAdminPage ? <AdminNavbar /> : <Navbar />)}
       <main className="main-content">
         <Routes>
           {/* Root path redirects based on user role */}
@@ -207,7 +213,7 @@ const AppContent = () => {
           <Route path="/wishlist" element={<Wishlist />} />
         </Routes>
       </main>
-      <Footer />
+      {shouldShowNavbar && <Footer />}
     </div>
   );
 };
